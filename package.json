@@ -51,6 +51,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@loopback/authentication-jwt": "^0.12.2",
     "@loopback/boot": "^5.0.2",
     "@loopback/core": "^4.0.2",
     "@loopback/repository": "^5.0.2",
@@ -58,6 +59,7 @@
     "@loopback/rest-explorer": "^5.0.2",
     "@loopback/service-proxy": "^5.0.2",
     "dotenv": "^16.0.1",
+    "loopback-connector-mysql": "^6.1.0",
     "loopback-connector-rest": "^4.0.1",
     "morgan": "^1.10.0",
     "tslib": "^2.4.0"

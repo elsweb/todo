@@ -2,15 +2,19 @@
 // Node module: @loopback/example-todo
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
-
+require('dotenv').config()
 import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
 import {juggler} from '@loopback/repository';
 
 const config = {
   name: 'db',
-  connector: 'memory',
-  localStorage: '',
-  file: './data/db.json',
+  connector: 'mysql',
+  url: '',
+  host: (process.env.DB_HOST ?? 'localhost'),
+  port: (process.env.DB_PORT ?? 3306),
+  user: (process.env.DB_USER ?? 'root'),
+  password: (process.env.DB_PASS ?? ''),
+  database: (process.env.DB_NAME ?? 'todo'),
 };
 
 // Observe application's life cycle to disconnect the datasource when
