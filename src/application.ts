@@ -2,6 +2,13 @@
 // Node module: @loopback/example-todo
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
+import {AuthenticationComponent} from '@loopback/authentication';
+import {
+  JWTAuthenticationComponent,
+  SECURITY_SCHEME_SPEC,
+  UserServiceBindings,
+} from '@loopback/authentication-jwt';
+import {DbDataSource} from './datasources';
 
 import {BootMixin} from '@loopback/boot';
 import {ApplicationConfig} from '@loopback/core';
@@ -22,11 +29,18 @@ export class TodoListApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
 ) {
   constructor(options: ApplicationConfig = {}) {
+    
+
+
     super(options);
 
-    // Set up the custom sequence
-    this.sequence(MySequence);
+    this.component(AuthenticationComponent);    
+    this.component(JWTAuthenticationComponent);
+    this.dataSource(DbDataSource, UserServiceBindings.DATASOURCE_NAME);
 
+    // Set up the custom sequence
+    this.sequence(MySequence);    
+    
     // Set up default home page
     this.static('/', path.join(__dirname, '../public'));
 

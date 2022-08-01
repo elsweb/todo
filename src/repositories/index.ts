@@ -4,3 +4,5 @@
 // License text available at https://opensource.org/licenses/MIT
 
 export * from './todo.repository';
+export * from './user.repository-db';
+export * from './user-credentials.repository-db';
