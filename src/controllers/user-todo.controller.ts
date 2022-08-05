@@ -20,7 +20,9 @@ import {
   Todo,
 } from '../models';
 import {UserRepository} from '../repositories';
+import {authenticate} from '@loopback/authentication';
 
+@authenticate('jwt')
 export class UserTodoController {
   constructor(
     @repository(UserRepository) protected userRepository: UserRepository,
