@@ -6,10 +6,10 @@ require('dotenv').config()
 import {inject, lifeCycleObserver, LifeCycleObserver} from '@loopback/core';
 import {juggler} from '@loopback/repository';
 
+
 const config = {
   name: 'db',
   connector: 'mysql',
-  url: '',
   host: (process.env.DB_HOST ?? 'localhost'),
   port: (process.env.DB_PORT ?? 3306),
   user: (process.env.DB_USER ?? 'root'),

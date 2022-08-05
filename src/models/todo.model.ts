@@ -3,7 +3,7 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-import {belongsTo, Entity, model, property} from '@loopback/repository';
+import {belongsTo, Entity, model, property, hasMany} from '@loopback/repository';
 import {User} from './user.model';
 
 @model()
@@ -11,7 +11,7 @@ export class Todo extends Entity {
   @property({
     type: 'number',
     id: true,
-    generated: false,
+    generated: true,
   })
   id?: number;
 
@@ -48,6 +48,8 @@ export class Todo extends Entity {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tag?: any;
 
+  @hasMany(() => User)
+  users: User[];
   @belongsTo(() => User)
   userId?: string;
 

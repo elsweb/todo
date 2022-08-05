@@ -1,64 +1,77 @@
 // Copyright IBM Corp. and LoopBack contributors 2020. All Rights Reserved.
-// Node module: @loopback/example-passport-login
+// Node module: @loopback/authentication-jwt
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-import {Entity, hasOne, model, property} from '@loopback/repository';
+import {Entity, hasOne, model, property, hasMany} from '@loopback/repository';
 import {UserCredentials} from './user-credentials.model';
+import {Todo} from './todo.model';
 
-@model()
+@model({
+  settings: {
+    strict: false,
+  },
+})
 export class User extends Entity {
+  // must keep it
+  // add id:string<UUID>
   @property({
     type: 'string',
-    // generated: true,
     id: true,
+    generated: false,
+    defaultFn: 'uuidv4',
   })
   id: string;
 
   @property({
     type: 'string',
-    mysql: {
-      default: null
-    }
   })
   realm?: string;
 
   // must keep it
   @property({
     type: 'string',
-    mysql: {
-      default: null
-    }
   })
-  username: string;
+  username?: string;
+
 
   // must keep it
   @property({
+    type: 'number',
+  })
+  todoId?: number;
+
+  @hasMany(() => Todo)
+  todos: Todo[];
+  // feat email unique
+  @property({
     type: 'string',
     required: true,
+    index: {
+      unique: true,
+    },
   })
   email: string;
 
   @property({
     type: 'boolean',
-    mysql: {
-      default: false
-    }   
   })
   emailVerified?: boolean;
 
   @property({
     type: 'string',
-    mysql: {
-      default: null
-    } 
   })
   verificationToken?: string;
 
   @hasOne(() => UserCredentials)
-  credentials?: UserCredentials;
+  userCredentials: UserCredentials;
 
+  // Define well-known properties here
+
+  // Indexer property to allow additional data
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
+
   constructor(data?: Partial<User>) {
     super(data);
   }

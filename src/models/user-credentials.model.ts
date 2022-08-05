@@ -1,28 +1,37 @@
 // Copyright IBM Corp. and LoopBack contributors 2020. All Rights Reserved.
-// Node module: @loopback/example-passport-login
+// Node module: @loopback/authentication-jwt
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-import {belongsTo, Entity, model, property} from '@loopback/repository';
-import {User} from './user.model';
+import {Entity, model, property} from '@loopback/repository';
 
-@model()
+@model({settings: {strict: false}})
 export class UserCredentials extends Entity {
   @property({
     type: 'string',
     id: true,
+    generated: false,
+    defaultFn: 'uuidv4',
   })
   id: string;
 
   @property({
     type: 'string',
     required: true,
-    hidden: true,
   })
   password: string;
 
-  @belongsTo(() => User)
-  userId?: string;
+  @property({
+    type: 'string',
+    required: true,
+  })
+  userId: string;
+
+  // Define well-known properties here
+
+  // Indexer property to allow additional data
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [prop: string]: any;
 
   constructor(data?: Partial<UserCredentials>) {
     super(data);

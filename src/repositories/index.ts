@@ -3,6 +3,7 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
+export * from './refresh-token.repository';
+export * from './user-credentials.repository';
+export * from './user.repository';
 export * from './todo.repository';
-export * from './user.repository-db';
-export * from './user-credentials.repository-db';

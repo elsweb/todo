@@ -4,5 +4,6 @@
 // License text available at https://opensource.org/licenses/MIT
 
 export * from './todo.model';
+export * from './refresh-token.model';
 export * from './user-credentials.model';
 export * from './user.model';
